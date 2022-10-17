@@ -14,14 +14,14 @@ VENV_DIR:=.venv
 VENV_BIN:=.venv/bin/
 ACTIVATE:=source .venv/bin/activate &&
 
-.PHONY: setup run lint format test build pre-commit coverage
+.PHONY: setup run lint format test build coverage
 
 setup:
 	test -d $(VENV_DIR) || python3 -m venv $(VENV_DIR)
 	poetry install
 
 run:
-	python $(PROJECT_NAME)
+	python paxos.py
 
 lint:
 	flake8 --show-source .
@@ -31,7 +31,7 @@ format:
 	black .
 
 test:
-	pytest
+	pytest test_paxos.py
 
 build:
 	poetry build -q
